@@ -65,17 +65,18 @@ The table below summarizes all the variables used in our analysis, detailing the
 |                     | `genres`        | Array of genres associated with the title        |
 
 To get the datasets, you can follow the following links:
-url_episodes <- "https://datasets.imdbws.com/title.episode.tsv.gz"
-url_ratings <- "https://datasets.imdbws.com/title.ratings.tsv.gz"
-url_basics <- "https://datasets.imdbws.com/title.basics.tsv.gz"
+- url_episodes <- "https://datasets.imdbws.com/title.episode.tsv.gz"
+- url_ratings <- "https://datasets.imdbws.com/title.ratings.tsv.gz"
+- url_basics <- "https://datasets.imdbws.com/title.basics.tsv.gz"
 
 ## Repository Overview - TO BE DONE
 
 ## Dependencies
-Please follow the installation guidelines on http://tilburgsciencehub.com/.
-R. 
- 
-# Make sure that you have installed all necessary packages for this research:
+- R. [Installation guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/).
+- Make. [Installation guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/).
+- To knit RMarkdown documents, make sure you have installed Pandoc using the [installation guide](https://pandoc.org/installing.html) on their website.
+
+# Make sure that you have installed all necessary R packages for this research:
 ```
 install.packages(dplyr)
 install.packages(tidyr)
