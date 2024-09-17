@@ -76,6 +76,7 @@ Please follow the installation guidelines on http://tilburgsciencehub.com/.
 R. 
  
 # Make sure that you have installed all necessary packages for this research:
+```
 install.packages(dplyr)
 install.packages(tidyr)
 install.packages(readr)
@@ -83,7 +84,7 @@ install.packages(ggplot2)
 install.packages(lubridate)
 install.packages(rmarkdown)
 install.packages(knitr)
-
+```
 ## Authors
 Team 6:
 - [Maria Yolovska](https://github.com/myolovska),    email: m.d.yolovska@tilburguniversity.edu
