@@ -1,4 +1,4 @@
-## **Unveiling the Evolution of Horror TV Series Ratings: A Dive into IMDb Trends**
+# Unveiling the Evolution of Horror TV Series Ratings: A Dive into IMDb Trends
 
 In this project we explore how IMDb ratings for horror TV Series change as
 shows progress through their seasons. Our analyses delves into the trends of
