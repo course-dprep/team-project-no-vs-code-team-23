@@ -1,17 +1,5 @@
----
-title: "README"
-output: pdf_document
-date: "2024-09-10"
----
-``` {r, echo=FALSE }
-tinytex::tlmgr_repo("http://mirror.ctan.org/systems/texlive/tlnet")
-```
-``` r
-    ## tlmgr option repository 'http://mirror.ctan.org/systems/texlive/tlnet'
-```
 ## **Unveiling the Evolution of Horror TV Series Ratings: A Dive into IMDb Trends**
 
-hello123
 In this project we explore how IMDb ratings for horror TV Series change as
 shows progress through their seasons. Our analyses delves into the trends of
 ratings over time, comparing different TV Series in the Horror Genre.
