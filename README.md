@@ -11,11 +11,11 @@ how the reception of horror TV series develops over time. By highlighting these
 trends, we offer actionable information to help producers decide
 about TV series production and viewer engagement strategies.
 
-## **Research question**
+## Research question
 “*Do Horror TV series episodes tend to receive higher or lower IMDb ratings as
 a show progresses through its seasons?*" 
 
-## **Research Method**
+## Research Method
 The research method includes several steps. First, a descriptive
 statistics analysis is performed. This is crucial as it gives simple
 insights into the data for any patterns and/or trends. It is helpful for
@@ -42,7 +42,7 @@ engagement changes with the progression of seasons.
 Listed below are the variables needed specifically for this research and their
 description:
 
-## **Combined Variable Descriptions**
+## Combined Variable Descriptions
 
 The table below summarizes all the variables used in our analysis, detailing their source datasets and descriptions.
 
@@ -69,9 +69,9 @@ url_episodes <- "https://datasets.imdbws.com/title.episode.tsv.gz"
 url_ratings <- "https://datasets.imdbws.com/title.ratings.tsv.gz"
 url_basics <- "https://datasets.imdbws.com/title.basics.tsv.gz"
 
-##**Repository Overview** - TO BE DONE
+## Repository Overview - TO BE DONE
 
-##**Dependencies**
+## Dependencies
 Please follow the installation guidelines on http://tilburgsciencehub.com/.
 R. 
  
@@ -138,8 +138,7 @@ summary(ratings_data)
 ```{r, echo = TRUE}
 summary(basics_data)
 ```
-#Variable descriptions
-#For “title.episode.tsv.gz”
+## Variable descriptions for “title.episode.tsv.gz”
 
 | Variable Name   | Description                         |
 |-----------------|-------------------------------------|
@@ -148,14 +147,15 @@ summary(basics_data)
 | `seasonNumber`  | Season number                       |
 | `episodeNumber` | Episode number within the season    |
 
-#For “title.ratings.tsv.gz”
+## Variabel description for “title.ratings.tsv.gz”
 
 | Variable Name   | Description                                         |
 |-----------------|-----------------------------------------------------|
 | `tconst`        | Unique identifier for the title                     |
 | `averageRating` | Weighted average of all the individual user ratings |
 | `numVotes`      | Number of votes the title has received              |
-#For "title.basics.tsv.gz"
+
+
 ## Variable Descriptions for "title.basics.tsv.gz"
 
 | Variable Name   | Description                                             |
@@ -170,7 +170,7 @@ summary(basics_data)
 | `runtimeMinutes`| Primary runtime of the title, in minutes                |
 | `genres`        | Up to three genres associated with the title            |
 
-#To further explore our data let's take a look at which horror movie has the most ratings for 2024 and has more than 1 season:
+## To further explore our data let's take a look at which horror movie has the most ratings for 2024 and has more than 1 season:
 ```{r, echo=TRUE}
 install.packages("ggplot2")
 install.packages("dplyr")
@@ -194,21 +194,21 @@ most_rated_horror_tv_series <- horror_tv_series_with_ratings %>%
 most_rated_horror_tv_series
 
 ```
-#Trend Analysis: Ratings of "Stranger Things" over its seasons
+## Trend Analysis: Ratings of "Stranger Things" over its seasons
 ``` {r, echo = TRUE}
 library(ggplot2)
 stranger_things <- basics_data %>%
   filter(primaryTitle == "Stranger Things")
 
-# Get the episodes of Stranger Things
+## Get the episodes of Stranger Things
 stranger_things_episodes <- episode_data %>%
   filter(parentTconst == stranger_things$tconst)
 
-# Join with ratings data
+## Join with ratings data
 stranger_things_ratings <- ratings_data %>%
   inner_join(stranger_things_episodes, by = "tconst")
 
-# Add episode information to the dataset
+## Add episode information to the dataset
 stranger_things_ratings <- stranger_things_ratings %>%
   left_join(stranger_things_episodes %>%
               select(tconst, seasonNumber, episodeNumber),
