@@ -86,9 +86,9 @@ install.packages(knitr)
 
 ##**Authors**
 Team 6:
--[Maria Yolovska](https://github.com/myolovska),    email: m.d.yolovska@tilburguniversity.edu
--[Nicole Nikolova](https://github.com/nikolnikolovan),    email: n.nikolova@tilburguniversity.edu
--[Noah Bouwhuis](https://github.com/Balboa57),    email: n.bouwhuis@tilburguniversity.edu
+- [Maria Yolovska](https://github.com/myolovska),    email: m.d.yolovska@tilburguniversity.edu
+- [Nicole Nikolova](https://github.com/nikolnikolovan),    email: n.nikolova@tilburguniversity.edu
+- [Noah Bouwhuis](https://github.com/Balboa57),    email: n.bouwhuis@tilburguniversity.edu
 
 # Deliverable 2 - 2.1. Data Exploration
 
