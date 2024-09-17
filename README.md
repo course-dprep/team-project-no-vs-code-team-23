@@ -84,7 +84,7 @@ install.packages(lubridate)
 install.packages(rmarkdown)
 install.packages(knitr)
 
-##**Authors**
+## Authors
 Team 6:
 - [Maria Yolovska](https://github.com/myolovska),    email: m.d.yolovska@tilburguniversity.edu
 - [Nicole Nikolova](https://github.com/nikolnikolovan),    email: n.nikolova@tilburguniversity.edu
