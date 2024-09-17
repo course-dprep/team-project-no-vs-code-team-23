@@ -1,14 +1,14 @@
 # Unveiling the Evolution of Horror TV Series Ratings: A Dive into IMDb Trends
 
-In this project we explore how IMDb ratings for horror TV Series change as
-shows progress through their seasons. Our analyses delves into the trends of
+In this project, we explore how IMDb ratings for horror TV Series change as
+shows progress through their seasons. Our analyses delve into the trends of
 ratings over time, comparing different TV Series in the Horror Genre.
 
 We explore the volume of Ratings fluctuating with each season, providing
-insights on the popularity and viewer engagement of these series. This analysis
+insights on these series' popularity and viewer engagement. This analysis
 is valuable for fans, critics, and industry professionals looking to understand
 how the reception of horror TV series develops over time. By highlighting these
-trends, we offer actionable information that can help producers make decisions
+trends, we offer actionable information to help producers decide
 about TV series production and viewer engagement strategies.
 
 ## **Research question**
@@ -20,12 +20,12 @@ The research method includes several steps. First, a descriptive
 statistics analysis is performed. This is crucial as it gives simple
 insights into the data for any patterns and/or trends. It is helpful for
 the research as it allows us to have a quick overview of how the ratings
-changes over the seasons of TV series. We will calculate the average
+change over the seasons of TV series. We will calculate the average
 ratings per season.
 
 Second, our approach combines regression analysis to model the relationship
 between ratings and seasons with time series analysis to observe trends and
-patterns over time.This integrated methodology provides a comprehensive view
+patterns over time. This integrated methodology provides a comprehensive view
 of how the reception of horror TV series develops, offering valuable insights
 for fans, critics, and industry professionals. Understanding these trends can
 guide decisions related to TV series production and viewer engagement
@@ -73,7 +73,7 @@ url_basics <- "https://datasets.imdbws.com/title.basics.tsv.gz"
 
 ##**Dependencies**
 Please follow the installation guidelines on http://tilburgsciencehub.com/.
- R. 
+R. 
  
 # Make sure that you have installed all necessary packages for this research:
 install.packages(dplyr)
@@ -85,12 +85,10 @@ install.packages(rmarkdown)
 install.packages(knitr)
 
 ##**Authors**
-Maria Yolovska, email: m.d.yolovska@tilburguniversity.edu
-Nicole Nikolova, email: n.nikolova@tilburguniversity.edu
-Noah Bouwhuis, email: n.bouwhuis@tilburguniversity.edu
-Mathijs Rikken
-
-
+Team 6:
+-[Maria Yolovska](https://github.com/myolovska),    email: m.d.yolovska@tilburguniversity.edu
+-[Nicole Nikolova](https://github.com/nikolnikolovan),    email: n.nikolova@tilburguniversity.edu
+-[Noah Bouwhuis](https://github.com/Balboa57),    email: n.bouwhuis@tilburguniversity.edu
 
 # Deliverable 2 - 2.1. Data Exploration
 
