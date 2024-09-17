@@ -12,8 +12,8 @@ trends, we offer actionable information to help producers decide
 about TV series production and viewer engagement strategies.
 
 ## Research question
-“*Do Horror TV series episodes tend to receive higher or lower IMDb ratings as
-a show progresses through its seasons?*" 
+*Do Horror TV series episodes tend to receive higher or lower IMDb ratings as
+a show progresses through its seasons?*
 
 ## Research Method
 The research method includes several steps. First, a descriptive
