@@ -87,7 +87,7 @@ class(ratings_data$numVotes)
 # Check for NAs 
 non_numeric_values_averageRating <-ratings_data$averageRating[!grepl("^\\d+$", ratings_data$averageRating)]
 print(non_numeric_values_averageRating)
-sum(is.na(ratings_data$tconst))
+sum(is.na(ratings_data$tconst)) 
 sum(is.na(ratings_data$averageRating))
 sum(is.na(ratings_data$numVotes))
 
