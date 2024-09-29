@@ -1,4 +1,3 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
+# Ignore .RDataTmp and large TSV files
+.RDataTmp
+data/title.basics.tsv.gz
