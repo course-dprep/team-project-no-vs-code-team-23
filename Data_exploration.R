@@ -87,7 +87,7 @@ class(ratings_data$numVotes)
 # Check for NAs 
 non_numeric_values_averageRating <-ratings_data$averageRating[!grepl("^\\d+$", ratings_data$averageRating)]
 print(non_numeric_values_averageRating)
-sum(is.na(ratings_data$tconst)) 
+sum(is.na(ratings_data$tconst))  
 sum(is.na(ratings_data$averageRating))
 sum(is.na(ratings_data$numVotes))
 
@@ -148,13 +148,24 @@ summary(basics_data$runtimeMinutes)
 basics_data$genres[basics_data$genres == "\\N"] <- NA
 basics_data$genres[basics_data$genres == ""] <- NA
 
+#Output
+write_tsv(episode_data, 'cleaned_episode_data')
+write_tsv(ratings_data, 'cleaned_ratings_data')
+write_tsv(basics_data, 'cleaned_basics_data')
 
+#Input
+episode_data <- read_tsv('cleaned_episode_data')
+ratings_data <- read_tsv('cleaned_ratings_data')
+basics_data <- read_tsv('cleaned_basics_data')
+head(basics_data)
 
 #Task 2
 
 #merging the datasets
-merged_data <- merge(episode_data, basics_data, by = "tconst")
-merged_data <- merge(merged_data, ratings_data, by = "tconst")
+merged_data <- episode_data %>%
+  inner_join(basics_data, by = "tconst") %>%
+  inner_join(ratings_data, by = "tconst")
+
 
 #filtering neccesary columns
 # I don't know which columns are deemed necessary. Here is the code to select columns that are needed.
@@ -166,9 +177,9 @@ merged_data <- merge(merged_data, ratings_data, by = "tconst")
 
 filtered_data <- merged_data %>%
   #filter for horror only
-  filter(grepl("Horror", genres))
-# Remove rows where seasonNumber is NA (\\N)
-filter(!is.na(seasonNumber)) %>%
+  filter(grepl("Horror", genres)) %>%
+  # Remove rows where seasonNumber is NA (\\N)
+  filter(!is.na(seasonNumber)) %>%
   # Group by parentTconst (series)
   group_by(parentTconst) %>%
   # Filter out series that have only season 1
@@ -207,10 +218,10 @@ print(remaining_missing_values)
 # Summary of cleaned data
 summary(cleaned_data)
 
-#Task 5
-# Make sure 'endYear' is treated as numeric and handle '\N' for non-series titles
+# Task 5: Perform calculations before converting to Date objects
 cleaned_data <- cleaned_data %>%
-  mutate(endYear = ifelse(endYear == "\\N", NA, as.numeric(endYear))) %>%
+  # Ensure endYear is numeric and handle NA values
+  mutate(endYear = as.numeric(replace(endYear, endYear == "\\N", NA))) %>%
   
   # 1. Seasonal trends: avg_rating_per_season
   group_by(seasonNumber, parentTconst) %>%
@@ -220,31 +231,40 @@ cleaned_data <- cleaned_data %>%
   # 2. Episode popularity: ratings_per_episode
   mutate(ratings_per_episode = numVotes) %>%
   
-  # 3. Year-based analysis: startYear
-  # This variable already exists, so no need to create it again
+  # 3. Year-based analysis: startYear already exists
   
-  # 4. TV show lifetime: endYear - startYear
-  mutate(tv_show_lifetime = endYear - startYear) %>%
+  # 4. TV show lifetime: Handle NA in endYear
+  mutate(tv_show_lifetime = ifelse(
+    is.na(endYear),
+    as.numeric(format(Sys.Date(), "%Y")) - startYear,
+    endYear - startYear
+  )) %>%
   
   # 5. Total number of ratings per TV Series
   group_by(parentTconst) %>%
   mutate(total_ratings_per_series = sum(numVotes, na.rm = TRUE)) %>%
   ungroup()
 
-
-#Task 6
-
-
-# Task 7
-
-
+# Task 7: Convert startYear and endYear to Date objects without overwriting
 cleaned_data <- cleaned_data %>%
-  # Convert startYear to a Date object
-  mutate(startYear = as.Date(paste(startYear, "01", "01", sep = "-"))) %>%
-  
-  # Convert endYear to a Date object, handle '\N' for non-series titles
-  mutate(endYear = ifelse(endYear == "\\N", NA, as.Date(paste(endYear, "01", "01", sep = "-")))) %>%
-  
-  # Optionally, check for consistency
-  mutate(startYear = ifelse(is.na(startYear), NA, floor_date(startYear, "year")),
-         endYear = ifelse(is.na(endYear), NA, floor_date(endYear, "year")))
+  # Create new Date variables
+  mutate(
+    startDate = as.Date(paste(startYear, "01", "01", sep = "-")),
+    endDate = as.Date(paste(endYear, "01", "01", sep = "-"))
+  )
+
+# Optional: Check for invalid years and filter them out
+cleaned_data <- cleaned_data %>%
+  filter(startYear >= 1900, startYear <= as.numeric(format(Sys.Date(), "%Y")))
+
+# Now, if you need to calculate durations using Date objects, use the new variables
+cleaned_data <- cleaned_data %>%
+  mutate(
+    tv_show_lifetime_years = as.numeric(difftime(
+      ifelse(is.na(endDate), Sys.Date(), endDate),
+      startDate,
+      units = "days"
+    )) / 365.25
+  )
+
+
