@@ -8,7 +8,7 @@ cleaned_data <- filtered_data %>%
   # Step 1: Replace "\N" with NA
   mutate(across(everything(), ~ na_if(., "\\N")))
 # Step 2: Count NA values in each column
-na_counts <- filtered_data %>%
+na_counts <- cleaned_data %>%
   summarize_all(~ sum(is.na(.)))
 # View the NA counts for each column
 na_counts
