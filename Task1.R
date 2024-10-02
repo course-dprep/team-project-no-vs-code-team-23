@@ -120,5 +120,5 @@ is.numeric(basics_data$endYear)
 #Output
 write_tsv(episode_data, 'cleaned_episode_data')
 write_tsv(ratings_data, 'cleaned_ratings_data')
-write_tsv(basics_data, 'cleaned_basics_data') 
+write_tsv(basics_data, 'cleaned_basics_data')  
 
