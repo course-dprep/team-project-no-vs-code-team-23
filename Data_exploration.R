@@ -19,18 +19,18 @@ library(knitr)
 # url_episodes <- "https://datasets.imdbws.com/title.episode.tsv.gz"
 # url_ratings <- "https://datasets.imdbws.com/title.ratings.tsv.gz"
 # url_basics <- "https://datasets.imdbws.com/title.basics.tsv.gz"
-#
-# # Download the files
+# #
+# # # Download the files
 # download.file(url_episodes, destfile = "title.episode.tsv.gz")
 # download.file(url_ratings, destfile = "title.ratings.tsv.gz")
 # download.file(url_basics, destfile = "title.basics.tsv.gz")
 # list.files()
 #
 # # Load the datasets
-# episode_data <- read_tsv("title.episode.tsv.gz")
-# ratings_data <- read_tsv("title.ratings.tsv.gz")
-# basics_data <- read_tsv("title.basics.tsv.gz")
-#
+#episode_data <- read_tsv("title.episode.tsv.gz")
+#ratings_data <- read_tsv("title.ratings.tsv.gz")
+#basics_data <- read_tsv("title.basics.tsv.gz")
+
 # summary(episode_data)
 # summary(ratings_data)
 # summary(basics_data)
@@ -124,8 +124,11 @@ unique(basics_data$endYear)
 basics_data$endYear <- as.integer(basics_data$endYear)
 is.integer(basics_data$endYear)
 
+#take current year
+current_year <- as.numeric(format(Sys.Date(), "%Y"))
+
 # Replace NA values in 'endYear' with the current year
-cleaned_data <- cleaned_data %>%
+basics_data <- basics_data %>%
   mutate(
     endYear = ifelse(is.na(endYear), current_year, endYear)
   )
@@ -205,6 +208,7 @@ print(missing_values)
 str(filtered_data)
 
 # Step 3: Clean and format relevant columns
+
 cleaned_data <- filtered_data %>%
   # Convert startYear and seasonNumber to numeric, replacing "\\N" with NA
   mutate(
