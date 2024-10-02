@@ -41,7 +41,6 @@ library(knitr)
 #
 # episode_data
 # ratings_data
-View(basics_data)
 
 # Load data sets
 library(readr)
@@ -109,7 +108,11 @@ sum(is.na(basics_data$titleType))
 unique(basics_data$startYear)
 # Replace non-numeric values (like \N) with NA for startYear
 basics_data$startYear[basics_data$startYear == "\\N"] <- NA
-basics_data$startYear[basics_data$startYear == ""] <- NA  
+basics_data$startYear[basics_data$startYear == ""] <- NA
+
+#Filter for startYear 1980
+basics_data <- basics_data[basics_data$startYear >= 1980, ]
+
 # Convert startYear to integer, now without errors
 basics_data$startYear <- as.integer(basics_data$startYear)
 is.integer(basics_data$startYear)
@@ -117,17 +120,23 @@ is.integer(basics_data$startYear)
 # endYear 
 class(basics_data$endYear)
 unique(basics_data$endYear)
-# Replace \N values with NA in the endYear column
-basics_data$endYear[basics_data$endYear == "\\N"] <- NA
-basics_data$endYear[basics_data$endYear == ""] <- NA
-sum(is.na(basics_data$endYear))
+# Check for problematic values in endYear (less than 1800)
 basics_data$endYear <- as.integer(basics_data$endYear)
 is.integer(basics_data$endYear)
-# Check for problematic values in endYear (less than 1800)
-invalid_years <- basics_data[basics_data$endYear < 1800 & !is.na(basics_data$endYear), ]
-print(invalid_years)
-# Replace invalid years (less than 1800) with NA
-basics_data$endYear[basics_data$endYear < 1800] <- NA
+
+# Replace NA values in 'endYear' with the current year
+cleaned_data <- cleaned_data %>%
+  mutate(
+    endYear = ifelse(is.na(endYear), current_year, endYear)
+  )
+
+# Set NA in endYear to 2024 and calculate tv_show_lifetime
+basics_data <- basics_data %>%
+  mutate(tv_show_lifetime = ifelse(
+    is.na(endYear),
+    2024 - startYear,
+    endYear - startYear
+  ))
 
 # Remove the isAdult column using select() from dplyr
 library(dplyr)
@@ -217,54 +226,33 @@ print(remaining_missing_values)
 
 # Summary of cleaned data
 summary(cleaned_data)
-
 # Task 5: Perform calculations before converting to Date objects
+current_year <- as.numeric(format(Sys.Date(), "%Y"))
+
 cleaned_data <- cleaned_data %>%
-  # Ensure endYear is numeric and handle NA values
-  mutate(endYear = as.numeric(replace(endYear, endYear == "\\N", NA))) %>%
-  
+  # Ensure endYear is numeric and handle placeholder values like '\\N'
+  mutate(
+    endYear = as.numeric(replace(endYear, endYear == "\\N", NA))
+  ) %>%
+  # Replace NA values in 'endYear' with the current year
+  mutate(
+    endYear = ifelse(is.na(endYear), current_year, endYear)
+  ) %>%
   # 1. Seasonal trends: avg_rating_per_season
   group_by(seasonNumber, parentTconst) %>%
   mutate(avg_rating_per_season = mean(averageRating, na.rm = TRUE)) %>%
   ungroup() %>%
-  
   # 2. Episode popularity: ratings_per_episode
   mutate(ratings_per_episode = numVotes) %>%
-  
   # 3. Year-based analysis: startYear already exists
-  
-  # 4. TV show lifetime: Handle NA in endYear
-  mutate(tv_show_lifetime = ifelse(
-    is.na(endYear),
-    as.numeric(format(Sys.Date(), "%Y")) - startYear,
-    endYear - startYear
-  )) %>%
-  
+  # 4. TV show lifetime
+  mutate(tv_show_lifetime = endYear - startYear) %>%
   # 5. Total number of ratings per TV Series
   group_by(parentTconst) %>%
   mutate(total_ratings_per_series = sum(numVotes, na.rm = TRUE)) %>%
   ungroup()
 
+
 # Task 7: Convert startYear and endYear to Date objects without overwriting
-cleaned_data <- cleaned_data %>%
-  # Create new Date variables
-  mutate(
-    startDate = as.Date(paste(startYear, "01", "01", sep = "-")),
-    endDate = as.Date(paste(endYear, "01", "01", sep = "-"))
-  )
-
-# Optional: Check for invalid years and filter them out
-cleaned_data <- cleaned_data %>%
-  filter(startYear >= 1900, startYear <= as.numeric(format(Sys.Date(), "%Y")))
-
-# Now, if you need to calculate durations using Date objects, use the new variables
-cleaned_data <- cleaned_data %>%
-  mutate(
-    tv_show_lifetime_years = as.numeric(difftime(
-      ifelse(is.na(endDate), Sys.Date(), endDate),
-      startDate,
-      units = "days"
-    )) / 365.25
-  )
-
+View(cleaned_data)
 
