@@ -1,7 +1,7 @@
 #Data Preparation
 # --- Input and Column Selection----
 # Load the dataset and select only the necessary columns
-filtered_data <- read.csv("filtered_data.csv")
+filtered_data <- read_csv("filtered_data.csv")
 
 clean_data <- filtered_data %>%
   select(tconst, parentTconst, seasonNumber, episodeNumber, titleType, primaryTitle, originalTitle, startYear, endYear, runtimeMinutes, genres, averageRating, numVotes)
