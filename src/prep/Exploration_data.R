@@ -60,7 +60,6 @@ result <- filtered_data %>%
   filter(numSeasons > 1) %>%
   arrange(desc(numVotes)) %>%
   slice(1)
-View(result)
 
 # Trial Trend Analysis: Ratings of "Most Watched TV Series" over its seasons
 most_watched <- filtered_data %>%
@@ -77,3 +76,7 @@ ggplot(most_watched, aes(x = seasonNumber, y = averageRating)) +
   ) +
   theme_minimal() +
   theme(legend.position = "bottom")
+
+#Output: Save the data into a CSV file
+write.csv(filtered_data, "filtered_data.csv", row.names = FALSE)
+
