@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+*.csv
+*.tsv.gz
+cleaned_basics_data/
+cleaned_episode_data/
+cleaned_ratings_data/
