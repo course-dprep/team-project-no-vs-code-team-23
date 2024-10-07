@@ -68,11 +68,6 @@ filtered_data <- merged_data %>%
   # 3. The season number is not missing (i.e., not NA).
   filter(grepl("Horror", genres) & numSeasons > 1 & !is.na(seasonNumber))
 
- #Filter out series with less than 5 episodes
-filtered_data <- clean_data %>%
-  group_by(parentTconst) %>%
-  filter(n() >= 5)
-
 # ---- Summary of the Dataset ----
 #Summary for the final dataset
 summary(filtered_data)
