@@ -26,15 +26,17 @@ library(broom)
 
 # ---- Input ----
 # URLs for the datasets needed in this research
-url_episodes <- "https://datasets.imdbws.com/title.episode.tsv.gz"
-url_ratings <- "https://datasets.imdbws.com/title.ratings.tsv.gz"
-url_basics <- "https://datasets.imdbws.com/title.basics.tsv.gz"
+urls <- c("https://datasets.imdbws.com/title.episode.tsv.gz",
+          "https://datasets.imdbws.com/title.ratings.tsv.gz",
+          "https://datasets.imdbws.com/title.basics.tsv.gz")
+
+filenames <- c("title.episode.tsv.gz", "title.ratings.tsv.gz", "title.basics.tsv.gz")
 
 # ---- Data Download: Download IMDb Datasets ----
 #Download the files
-download.file(url_episodes, destfile = "title.episode.tsv.gz")
-download.file(url_ratings, destfile = "title.ratings.tsv.gz")
-download.file(url_basics, destfile = "title.basics.tsv.gz")
+for (i in seq_along(urls)) {
+  download.file(urls[i], destfile = filenames[i])
+}
 
 # ---- Data Loading: Load the downloaded datasets ----
 #Load the datasets
@@ -49,17 +51,22 @@ merged_data <- episode_data %>%
   inner_join(ratings_data, by = "tconst")
 
 # ---- Data Filtering & Transformation ----
-#Filtering horror & episodes from series with >1season
 filtered_data <- merged_data %>%
-  #filter for horror only
-  filter(grepl("Horror", genres)) %>%
-  # Remove rows where seasonNumber is NA (\\N)
-  filter(!is.na(seasonNumber)) %>%
-  # Group by parentTconst (series)
+  # Group by parentTconst (series identifier) to calculate statistics for each series individually
   group_by(parentTconst) %>%
-  # Filter out series that have only season 1
-  filter(max(seasonNumber) > 1) %>%
-  ungroup()
+  
+  # Create a new column 'numSeasons' which holds the maximum season number for each series
+  # This helps identify how many seasons a particular series has
+  mutate(numSeasons = max(seasonNumber, na.rm = TRUE)) %>%
+  
+  # Remove the grouping to ensure subsequent operations are applied to the entire dataset, not grouped data
+  ungroup() %>%
+  
+  # Filter the dataset based on three conditions:
+  # 1. The series is categorized as "Horror" in the 'genres' column.
+  # 2. The series has more than one season (as calculated in 'numSeasons').
+  # 3. The season number is not missing (i.e., not NA).
+  filter(grepl("Horror", genres) & numSeasons > 1 & !is.na(seasonNumber))
 
 # ---- Summary of the Dataset ----
 #Summary for the final dataset
@@ -68,9 +75,6 @@ summary(filtered_data)
 # ---- Analysis ----
 #To further explore our data let's take a look at which horror movie has the most ratings for 2024 and has more than 1 season
 result <- filtered_data %>%
-  group_by(parentTconst) %>%
-  mutate(numSeasons = max(seasonNumber, na.rm = TRUE)) %>%
-  ungroup() %>%
   filter(numSeasons > 1) %>%
   arrange(desc(numVotes)) %>%
   slice(1)
