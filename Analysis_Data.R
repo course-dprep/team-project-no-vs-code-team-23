@@ -17,6 +17,9 @@ clean_data <- clean_data %>%
   group_by(parentTconst) %>%
   filter(n() >= 5) %>%
   ungroup()
+# Remove any rows with NA values in key columns
+clean_data <- clean_data %>%
+  filter(!is.na(seasonNumber), !is.na(averageRating))
 
 # ---- Descriptive Statistics ----
 # Summary statistics of ratings across all seasons
@@ -68,6 +71,12 @@ ggplot(clean_data, aes(x = seasonNumber, y = averageRating)) +
 
 
 # ---- Regression by Series ----
+#Filter out series with fewer than 2 distinct seasons
+filtered_data <- clean_data %>%
+  group_by(parentTconst) %>%
+  filter(n_distinct(seasonNumber) >= 2) %>%
+  ungroup()
+
 # Creating Models for Each Series Separately
 models_by_series <- filtered_data %>%
   group_by(parentTconst) %>%
