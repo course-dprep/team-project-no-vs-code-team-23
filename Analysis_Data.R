@@ -11,6 +11,13 @@ library(broom)
 # ---- Input ----
 clean_data <- read_csv('clean_data.csv')
 
+# ---- Filtering Series with Enough Episodes ----
+# Filter out series with fewer than 5 episodes
+clean_data <- clean_data %>%
+  group_by(parentTconst) %>%
+  filter(n() >= 5) %>%
+  ungroup()
+
 # ---- Descriptive Statistics ----
 # Summary statistics of ratings across all seasons
 summary_stats <- clean_data %>%
