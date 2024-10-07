@@ -82,4 +82,15 @@ most_watched <- filtered_data %>%
 ggplot(most_watched, aes(x = seasonNumber, y = averageRating)) +
   geom_line(aes(color = seasonNumber), show.legend = FALSE) +
   geom_point(aes(color = seasonNumber), show.legend = FALSE) +
-  facet_wrap(~ seasonNumber, scale
+  facet_wrap(~ seasonNumber, scales = "free_x") +
+  labs(
+    title = "IMDb Ratings for Most Watched TV Series by Season",
+    x = "Season Number",
+    y = "Average Rating"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# ---- Output ----
+#Save the data into a CSV file
+write.csv(filtered_data, "filtered_data.csv", row.names = FALSE)
