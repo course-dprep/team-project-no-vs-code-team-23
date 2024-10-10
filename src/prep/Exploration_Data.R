@@ -1,16 +1,15 @@
 #Data Exploration
 # ---- Getting Started ----
-#Install Packages
-install.packages(dplyr)
-install.packages(tidyr)
-install.packages(readr)
-install.packages(ggplot2)
-install.packages(lubridate)
-install.packages(rmarkdown)
-install.packages(knitr)
-install.packages(stringr)
-install.packages(purrr)
-install.packages(broom)
+# install.packages(dplyr)
+# install.packages(tidyr)
+# install.packages(readr)
+# install.packages(ggplot2)
+# install.packages(lubridate)
+# install.packages(rmarkdown)
+# install.packages(knitr)
+# install.packages(stringr)
+# install.packages(purrr)
+# install.packages(broom)
 
 #Load packages
 library(dplyr)
