@@ -78,13 +78,18 @@ To get the datasets, you can follow the following links:
 
 # Make sure that you have installed all necessary R packages for this research:
 ```
-install.packages(dplyr)
-install.packages(tidyr)
-install.packages(readr)
-install.packages(ggplot2)
-install.packages(lubridate)
-install.packages(rmarkdown)
-install.packages(knitr)
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("readr")
+install.packages("ggplot2")
+install.packages("lubridate")
+install.packages("rmarkdown")
+install.packages("knitr")
+install.packages("stringr")
+install.packages("purrr")
+install.packages("broom")
+install.packages("vroom")
+
 ```
 ## Authors
 Team 6:
