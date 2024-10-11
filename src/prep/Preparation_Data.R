@@ -1,6 +1,16 @@
 #Data Preparation
 # --- Input and Column Selection----
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(broom)
+
 # Load the dataset and select only the necessary columns
+# List of required packages
 filtered_data <- read_csv("filtered_data.csv")
 
 clean_data <- filtered_data %>%
@@ -31,8 +41,8 @@ clean_data <- filtered_data %>%
 # ---- Data Formatting: Factors and Handling Year ----
 # Format column 'titleType' as a factor from character
 clean_data$titleType <- as.factor(clean_data$titleType)
-is.factor(basics_data$titleType)
-sum(is.na(basics_data$titleType))
+is.factor(clean_data$titleType)
+sum(is.na(clean_data$titleType))
 
 #Handle missing values for endYear as using current year
 current_year <- as.numeric(format(Sys.Date(), "%Y"))
