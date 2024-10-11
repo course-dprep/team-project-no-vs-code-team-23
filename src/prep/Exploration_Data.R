@@ -1,48 +1,52 @@
-#Data Exploration
-# ---- Getting Started ----
-# install.packages("dplyr")
-# install.packages("tidyr")
-# install.packages("readr")
-# install.packages("ggplot2")
-# install.packages("lubridate")
-# install.packages("rmarkdown")
-# install.packages("knitr")
-# install.packages("stringr")
-# install.packages("purrr")
-# install.packages("broom")
-
-# #Load packages
-# library(dplyr)
-# library(tidyr)
-# library(readr)
-# library(ggplot2)
-# library(lubridate)
-# library(rmarkdown)
-# library(knitr)
-# library(stringr)
-# library(purrr)
-# library(broom)
-
-
-# Set CRAN mirror at the beginning of the script
+# # Set CRAN mirror at the beginning of the script
 options(repos = c(CRAN = "https://cloud.r-project.org/"))
 
-# List of required packages
-packages <- c("dplyr", "tidyr", "readr", "ggplot2", "lubridate", 
-              "rmarkdown", "knitr", "stringr", "purrr", "broom")
+# Data Exploration
+# ---- Getting Started ----
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("readr")
+install.packages("ggplot2")
+install.packages("lubridate")
+install.packages("rmarkdown")
+install.packages("knitr")
+install.packages("stringr")
+install.packages("purrr")
+install.packages("broom")
+install.packages("vroom")
 
-# Function to install packages if they are not already installed
-install_if_missing <- function(package) {
-    if (!package %in% installed.packages()[, "Package"]) {
-        install.packages(package, dependencies = TRUE)  # Ensure dependencies are also installed
-    }
-}
+#Load packages
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+library(lubridate)
+library(rmarkdown)
+library(knitr)
+library(stringr)
+library(purrr)
+library(broom)
+library(vroom)
 
-# Install each package
-sapply(packages, install_if_missing)
 
-# Load required packages
-lapply(packages, library, character.only = TRUE)
+
+
+# # List of required packages
+# packages <- c("dplyr", "tidyr", "readr", "ggplot2", "lubridate", 
+#               "rmarkdown", "knitr", "stringr", "purrr", "broom")
+
+# # Function to install packages if they are not already installed
+# install_if_missing <- function(package) {
+#     if (!package %in% installed.packages()[, "Package"]) {
+#         install.packages(package, dependencies = TRUE)  # Ensure dependencies are also installed
+#     }
+# }
+
+# # Install each package
+# sapply(packages, install_if_missing)
+
+# # Load required packages
+# lapply(packages, library, character.only = TRUE)
 
 # ---- Input ----
 # URLs for the datasets needed in this research
@@ -69,6 +73,9 @@ basics_data <- read_tsv("title.basics.tsv.gz")
 merged_data <- episode_data %>%
   inner_join(basics_data, by = "tconst") %>%
   inner_join(ratings_data, by = "tconst")
+
+
+# merged_data <- read_csv("merged_data.csv")
 
 # ---- Data Filtering & Transformation ----
 filtered_data <- merged_data %>%
@@ -118,3 +125,5 @@ ggplot(most_watched, aes(x = seasonNumber, y = averageRating)) +
 # ---- Output ----
 #Save the data into a CSV file
 write.csv(filtered_data, "filtered_data.csv", row.names = FALSE)
+
+
