@@ -6,15 +6,15 @@ all: data_exploration data_preparation data_analysis
 
 # Target to run the data exploration R script
 data_exploration:
-	$(R_PATH) src/prep/Exploration_Data.R
+	Rscript src/prep/Exploration_Data.R
 
 # Target to run the data preparation R script
 data_preparation: data_exploration
-	$(R_PATH) src/prep/Preparation_Data.R
+	Rscript src/prep/Preparation_Data.R
 
 # Target to run the data analysis R script
 data_analysis: data_preparation
-	$(R_PATH) src/analysis/Analysis_Data.R
+	Rscript src/analysis/Analysis_Data.R
 
 # Clean target to remove any temporary files if needed (optional)
 clean:
