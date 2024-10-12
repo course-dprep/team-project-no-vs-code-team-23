@@ -28,53 +28,7 @@ library(purrr)
 library(broom)
 library(vroom)
 
-
-
-
-# # List of required packages
-# packages <- c("dplyr", "tidyr", "readr", "ggplot2", "lubridate", 
-#               "rmarkdown", "knitr", "stringr", "purrr", "broom")
-
-# # Function to install packages if they are not already installed
-# install_if_missing <- function(package) {
-#     if (!package %in% installed.packages()[, "Package"]) {
-#         install.packages(package, dependencies = TRUE)  # Ensure dependencies are also installed
-#     }
-# }
-
-# # Install each package
-# sapply(packages, install_if_missing)
-
-# # Load required packages
-# lapply(packages, library, character.only = TRUE)
-
-# # ---- Input ----
-# # URLs for the datasets needed in this research
-# urls <- c("https://datasets.imdbws.com/title.episode.tsv.gz",
-#           "https://datasets.imdbws.com/title.ratings.tsv.gz",
-#           "https://datasets.imdbws.com/title.basics.tsv.gz")
-
-# filenames <- c("title.episode.tsv.gz", "title.ratings.tsv.gz", "title.basics.tsv.gz")
-
-# # ---- Data Download: Download IMDb Datasets ----
-# #Download the files
-# for (i in seq_along(urls)) {
-#   download.file(urls[i], destfile = filenames[i])
-# }
-
-# # ---- Data Loading: Load the downloaded datasets ----
-# #Load the datasets
-# episode_data <- read_tsv("title.episode.tsv.gz")
-# ratings_data <- read_tsv("title.ratings.tsv.gz")
-# basics_data <- read_tsv("title.basics.tsv.gz")
-
-# # ---- Data Merging: Combine datasets based on 'tconst' ----
-# #Merging the datasets
-# merged_data <- episode_data %>%
-#   inner_join(basics_data, by = "tconst") %>%
-#   inner_join(ratings_data, by = "tconst")
-
-
+#load in data
 merged_data <- read_csv("gen/merged_data.csv")
 
 # ---- Data Filtering & Transformation ----
