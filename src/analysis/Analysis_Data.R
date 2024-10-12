@@ -9,7 +9,7 @@ library(stringr)
 library(broom)
 
 # ---- Input ----
-clean_data <- read_csv('clean_data.csv')
+clean_data <- read_csv('gen/clean_data.csv')
 
 # ---- Filtering Series with Enough Episodes ----
 # Filter out series with fewer than 5 episodes
@@ -180,5 +180,5 @@ ggplot(clean_data, aes(x = title_word_count, y = averageRating)) +
 
 
 # ---- Save Processed Analysis Data ----
-write.csv(summary_stats, "summary_statistics.csv")
+write.csv(summary_stats, "gen/summary_statistics.csv")
 

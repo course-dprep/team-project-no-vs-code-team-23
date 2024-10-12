@@ -29,4 +29,4 @@ merged_data <- episode_data %>%
   inner_join(ratings_data, by = "tconst")
 
 # ---- Save Merged Data ----
-write.csv(merged_data, "merged_data.csv", row.names = FALSE)
+write.csv(merged_data, "gen/merged_data.csv", row.names = FALSE)

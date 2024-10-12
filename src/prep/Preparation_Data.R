@@ -11,7 +11,7 @@ library(broom)
 
 # Load the dataset and select only the necessary columns
 # List of required packages
-filtered_data <- read_csv("filtered_data.csv")
+filtered_data <- read_csv("gen/filtered_data.csv")
 
 clean_data <- filtered_data %>%
   select(tconst, parentTconst, seasonNumber, episodeNumber, titleType, primaryTitle, originalTitle, startYear, endYear, runtimeMinutes, genres, averageRating, numVotes)
@@ -72,4 +72,4 @@ clean_data <- clean_data %>%
 
 # ---- Output ----
 #Save the data as a CSV file
-write.csv(clean_data, 'clean_data.csv', row.names = FALSE)
+write.csv(clean_data, 'gen/clean_data.csv', row.names = FALSE)
