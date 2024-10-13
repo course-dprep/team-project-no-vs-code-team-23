@@ -54,6 +54,8 @@ ggplot(clean_data, aes(x = seasonNumber, y = averageRating)) +
   ) +
   theme_minimal()
 
+  ggsave("gen/regression_analysis_plot.pdf")
+
 # ---- Key metrics from Regression Analysis ----
 #Coefficient for Season Number: 0.007999 
 #Standard Error: 0.004079 
@@ -148,6 +150,9 @@ ggplot(aggregated_ratings, aes(x = seasonNumber, y = avg_season_rating)) +
     y = "Average IMDb Rating"
   ) +
   theme_minimal()
+
+ggsave("gen/smoothed_ratings_plot.pdf")
+
 
 #---- Results of Smoothing the plot ----
 #Non-Linear Trend: The smoothed line indicates a non-linear relationship between season number and average rating. There is no simple upward or downward trend but rather a fluctuating pattern.
