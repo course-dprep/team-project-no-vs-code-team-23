@@ -1,6 +1,3 @@
-# # Set CRAN mirror at the beginning of the script
-options(repos = c(CRAN = "https://cloud.r-project.org/"))
-
 # Data Exploration
 # ---- Getting Started ----
 install.packages("dplyr")
