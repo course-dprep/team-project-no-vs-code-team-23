@@ -69,7 +69,21 @@ To get the datasets, you can follow the following links:
 - url_ratings <- "https://datasets.imdbws.com/title.ratings.tsv.gz"
 - url_basics <- "https://datasets.imdbws.com/title.basics.tsv.gz"
 
-## Repository Overview - TO BE DONE
+## Repository Overview 
+
+The workflow of the repository consists of four parts. 
+
+**1. Loading the data**
+To start, the data is downloaded, loaded, and merged into one file. On this file, the exploration, preparation, and analysis steps are conducted. 
+
+**2. Data Exploration**
+After the data is collected and merged into one file, exploratory data analysis is conducted to get a first grasp of the data at hand. The next steps are formulated based on the findings from this step. 
+
+**3. Data Preparation**
+Given the insights achieved from the data exploration step, the dataset is prepared for analysis. NAs are handled, values are formatted appropriately and the data is sorted and filtered in preparation for the analysis.
+
+**4. Data analysis**
+Multiple analyses are conducted over the data. Statistical calculations will be described. Regression plots will be created to visualize the outcome of the analyses. Generated plots will be saved into the '/gen' folder. 
 
 ## Dependencies
 - R. [Installation guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/).
