@@ -133,6 +133,8 @@ ggplot(aggregated_ratings, aes(x = seasonNumber, y = avg_season_rating)) +
   ) +
   theme_minimal()
 
+  ggsave("gen/general_trend_ratings_plot.pdf")
+
 #---- Summary of Results ----
 #There doesn’t appear to be a smooth increasing or decreasing trend over seasons. Instead, the ratings fluctuate, which could indicate that ratings are affected by multiple factors other than just the progression of seasons.
 #Since this plot aggregates ratings across all series, it might obscure series-specific patterns. Certain series might have consistently increasing or decreasing trends that are averaged out in this plot.
@@ -151,7 +153,7 @@ ggplot(aggregated_ratings, aes(x = seasonNumber, y = avg_season_rating)) +
   ) +
   theme_minimal()
 
-ggsave("gen/smoothed_ratings_plot.pdf")
+  ggsave("gen/smoothed_ratings_plot.pdf")
 
 
 #---- Results of Smoothing the plot ----
@@ -179,6 +181,8 @@ ggplot(clean_data, aes(x = title_word_count, y = averageRating)) +
     y = "Average IMDb Rating"
   ) +
   theme_minimal()
+
+  ggsave("gen/visualized_correlation.pdf")
 # ---- Summary of Results ----
 #There is a statistically significant positive relationship between the number of words in a title and IMDb ratings, but the effect size is minimal. In practical terms, for each additional word in a title, the average rating increases slightly by 0.017.
 #However, the low R-squared value indicates that title_word_count alone is not a strong predictor of averageRating. Most of the variation in ratings is explained by other factors not included in this simple model.
